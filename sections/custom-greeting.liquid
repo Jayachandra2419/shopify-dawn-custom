@@ -1,0 +1,42 @@
+{% comment %}
+Simple “Hello World” style section with editable text.
+Add it to the Home page from: Customize → Add section → Custom Greeting.
+{% endcomment %}
+
+<section class="section custom-greeting" style="padding: 28px 0;">
+  <div class="page-width" style="text-align: center;">
+    <h2 style="margin: 0 0 8px 0;">
+      {{ section.settings.heading | escape }}
+    </h2>
+    {% if section.settings.subtext != blank %}
+      <p style="margin: 0; opacity: 0.9;">
+        {{ section.settings.subtext }}
+      </p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom Greeting",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Welcome to Jayadevstore 👋"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Hand-picked products. Great prices."
+    }
+  ],
+  "presets": [
+    { "name": "Custom Greeting" }
+  ]
+}
+{% endschema %}
