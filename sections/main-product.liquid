@@ -99,6 +99,10 @@
               {%- when 'title' -%}
                 <div class="product__title" {{ block.shopify_attributes }}>
                   <h1>{{ product.title | escape }}</h1>
+
+                <p style="color: green; font-weight: bold;">
+  Special Offer: Free Free Free 🚚
+</p>
                   <a href="{{ product.url }}" class="product__title">
                     <h2 class="h1">
                       {{ product.title | escape }}
