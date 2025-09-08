@@ -1,0 +1,17 @@
+<section class="collection-promo" style="padding:16px 0;">
+  <div class="page-width" style="text-align:center;">
+    <p style="margin:0;">
+      {{ section.settings.text | default: 'Shop our latest collection ✨' | escape }}
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Promo",
+  "presets": [{ "name": "Collection Promo" }],
+  "settings": [
+    { "type": "text", "id": "text", "label": "Promo text", "default": "Shop our latest collection ✨" }
+  ]
+}
+{% endschema %}

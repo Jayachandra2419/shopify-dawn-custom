@@ -1,0 +1,20 @@
+<section class="product-extra-info" style="padding:16px 0;">
+  <div class="page-width">
+    <h3>{{ section.settings.heading | default: 'Why shop with us?' | escape }}</h3>
+    <ul style="margin:0;padding-left:18px;">
+      <li>🚚 Fast shipping</li>
+      <li>✅ Quality checked</li>
+      <li>📦 Easy returns</li>
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Extra Info",
+  "presets": [{ "name": "Product Extra Info" }],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why shop with us?" }
+  ]
+}
+{% endschema %}

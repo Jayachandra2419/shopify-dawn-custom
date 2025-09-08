@@ -1,0 +1,17 @@
+<section class="cart-promo" style="padding:12px 0;">
+  <div class="page-width" style="text-align:center;">
+    <p style="margin:0;">
+      {{ section.settings.message | default: '🎁 Free shipping over $50' | escape }}
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart Promo",
+  "presets": [{ "name": "Cart Promo" }],
+  "settings": [
+    { "type": "text", "id": "message", "label": "Message", "default": "🎁 Free shipping over $50" }
+  ]
+}
+{% endschema %}
