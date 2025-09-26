@@ -3595,23 +3595,26 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
-/* ==== CUSTOM: Promo Badge ==== */
+/* Badge sits above gallery overlays */
 .badge--custom {
   position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
+  top: 12px;
+  left: 12px;
+  z-index: 9999;              /* was 2; bump it high */
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
   font-size: 12px;
   line-height: 1;
-  border-radius: 999px;
-  background: #111;   /* tweak later */
-  color: #fff;
   letter-spacing: .2px;
-  z-index: 2;
+  pointer-events: none;       /* don’t block clicks on the image */
 }
 
-/* Make sure containers are positioning contexts */
-.card__media { position: relative; }
-.product__media-wrapper { position: relative; }
-
+/* Optional: make long text tidy */
+.badge--custom {
+  max-width: 60%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
