@@ -1,0 +1,12 @@
+{% comment %}
+Reusable promo badge.
+Usage:
+  - PLP (cards): {% render 'product-badge', item: card_product %}
+  - PDP (page):  {% render 'product-badge', item: product %}
+Metafield: custom.badge (single line text)
+{% endcomment %}
+
+{% assign badge = item.metafields.custom.badge %}
+{% if badge != blank %}
+  <span class="badge badge--custom">{{ badge }}</span>
+{% endif %}
