@@ -97,6 +97,12 @@
           "settings": {
             "share_label": "Share"
           }
+        },
+        "custom_liquid_QXjbGk": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'ai-gift-finder' %}"
+          }
         }
       },
       "block_order": [
@@ -112,7 +118,8 @@
         "collapsible-row-1",
         "collapsible-row-2",
         "collapsible-row-3",
-        "share"
+        "share",
+        "custom_liquid_QXjbGk"
       ],
       "settings": {
         "enable_sticky_info": true,
