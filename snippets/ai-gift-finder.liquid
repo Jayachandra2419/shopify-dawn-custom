@@ -1,0 +1,88 @@
+{% comment %}
+AI Gift Finder widget. Requires a serverless endpoint:
+Replace ENDPOINT with your Vercel function URL.
+{% endcomment %}
+
+<div id="ai-gift-finder" class="aigf">
+  <h3>Find the perfect gift 🎁</h3>
+  <form id="aigf-form">
+    <label>Recipient</label>
+    <input name="recipient" placeholder="e.g., friend, dad, beginner snowboarder" required />
+
+    <label>Occasion</label>
+    <input name="occasion" placeholder="birthday, anniversary, festival" />
+
+    <label>Interests</label>
+    <input name="interests" placeholder="speed, freestyle, eco, lightweight" />
+
+    <div class="row">
+      <div>
+        <label>Budget min (₹)</label>
+        <input name="budgetMin" type="number" min="0" />
+      </div>
+      <div>
+        <label>Budget max (₹)</label>
+        <input name="budgetMax" type="number" min="0" />
+      </div>
+    </div>
+
+    <button type="submit">Ask AI</button>
+    <span id="aigf-status" aria-live="polite"></span>
+  </form>
+
+  <div id="aigf-results" class="aigf-results" hidden></div>
+</div>
+
+<script>
+(function(){
+  const ENDPOINT = 'https://YOUR-VERCEL-PROJECT.vercel.app/api/gift-finder'; // <-- change this
+  const form = document.getElementById('aigf-form');
+  const results = document.getElementById('aigf-results');
+  const statusEl = document.getElementById('aigf-status');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    statusEl.textContent = 'Thinking…';
+    results.hidden = true; results.innerHTML = '';
+
+    const fd = new FormData(form);
+    const payload = Object.fromEntries(fd.entries());
+    ['budgetMin', 'budgetMax'].forEach(k => { if(payload[k]) payload[k] = Number(payload[k]); });
+
+    try {
+      const r = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      });
+      const data = await r.json();
+      const items = data.results || [];
+
+      if (!items.length) {
+        statusEl.textContent = 'No suggestions yet. Try different criteria.';
+        return;
+      }
+
+      statusEl.textContent = '';
+      results.hidden = false;
+      items.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'aigf-card';
+        card.innerHTML = `
+          <img src="${p.image || ''}" alt="${p.title || ''}" />
+          <div class="info">
+            <h4>${p.title}</h4>
+            <p class="reason">${p.reason}</p>
+            <p class="price">${p.currency || ''} ${p.price || ''}</p>
+            <a class="btn" href="${p.url}">View product</a>
+          </div>
+        `;
+        results.appendChild(card);
+      });
+    } catch(e){
+      console.error(e);
+      statusEl.textContent = 'Something went wrong. Please try again.';
+    }
+  });
+})();
+</script>
