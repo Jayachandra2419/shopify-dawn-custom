@@ -202,6 +202,7 @@
                   <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
                     {{ product.description }}
                   </div>
+                  {% render 'ai-gift-finder' %}
                 {%- endif -%}
               {%- when 'sku' -%}
                 <p
